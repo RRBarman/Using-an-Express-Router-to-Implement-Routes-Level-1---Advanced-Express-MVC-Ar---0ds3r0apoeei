@@ -65,7 +65,7 @@ router.post('/api/v1/product', (req, res) => {
     if (!title || !price) {
       //throw new Error('Title and price are required');
       req.status(404).json({
-        status:'Error',
+        status:'error',
         message:'Title and price are required',
       });
     }
@@ -82,7 +82,7 @@ router.post('/api/v1/product', (req, res) => {
         if (err){ 
           //throw new Error('Error creating product');
           req.status(400).json({
-            status:'Error',
+            status:'error',
             message:'Error creating product',
             });
         }
