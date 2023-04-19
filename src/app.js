@@ -63,7 +63,11 @@ router.post('/api/v1/product', (req, res) => {
   try {
     const { title, price } = req.body;
     if (!title || !price) {
-      throw new Error('Title and price are required');
+      //throw new Error('Title and price are required');
+      req.status(404).json({
+        status:'Error',
+        message:'Title and price are required',
+      });
     }
     const newProduct = {
       id: products.length + 1,
@@ -75,7 +79,13 @@ router.post('/api/v1/product', (req, res) => {
       `${__dirname}/../dev-data/product.json`,
       JSON.stringify(products),
       (err) => {
-        if (err) throw new Error('Error creating product');
+        if (err){ 
+          //throw new Error('Error creating product');
+          req.status(400).json({
+            status:'Error',
+            message:'Error creating product',
+            });
+        }
         res.status(201).json({
           status: 'success',
           data: {
