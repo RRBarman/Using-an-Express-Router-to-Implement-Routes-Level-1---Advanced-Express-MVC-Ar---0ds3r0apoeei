@@ -65,8 +65,8 @@ router.post('/api/v1/product', (req, res) => {
     if (!title || !price) {
       //throw new Error('Title and price are required');
       return req.status(404).json({
-        status:'Error',
-        message:'Title and price are required',
+        status: 'Error',
+        message: 'Title and price are required',
       });
     }
     const newProduct = {
@@ -75,34 +75,21 @@ router.post('/api/v1/product', (req, res) => {
       price,
     };
     products.push(newProduct);
-    fs.writeFileSync(
-      `${__dirname}/../dev-data/product.json`,
-      JSON.stringify(products));//,
-      //(err) => {
-       // if (err){ 
-          //throw new Error('Error creating product');
-         /*return req.status(400).json({
-            status:'Error',
-            message:'Error creating product',
-            });*/
-       // }
-        res.status(201).json({
-          status: 'success',
-          data: {
-            product: newProduct,
-          },
-        });
-      }
-    );
-  } 
-  catch (error) {
+    fs.writeFileSync(`${__dirname}/../dev-data/product.json`, JSON.stringify(products));
+    res.status(201).json({
+      status: 'success',
+      data: {
+        product: newProduct,
+      },
+    });
+  } catch (error) {
     res.status(400).json({
       status: 'Error',
       message: 'Error creating product',
     });
-  
   }
-});
+}
+);
 
 const app = express();
 app.use(express.json());
