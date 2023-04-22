@@ -82,7 +82,7 @@ router.post('/api/v1/product', (req, res) => {
         if (err){ 
           //throw new Error('Error creating product');
           req.status(400).json({
-            status:'error',
+            status:'Error',
             message:'Error creating product',
             });
         }
@@ -96,7 +96,7 @@ router.post('/api/v1/product', (req, res) => {
     );
   } catch (error) {
     res.status(404).json({
-      status: 'error',
+      status: 'Error',
       message: error.message,
     });
   }
