@@ -53,14 +53,14 @@ router.get('/api/v1/product', (req, res) => {
     });
   } catch (error) {
     res.status(400).json({
-      status: 'error',
+      status: 'Error',
       message: error.message,
     });
   }
 });
 
 router.post('/api/v1/product', (req, res) => {
-  //try {
+  try {
     const { title, price } = req.body;
     if (!title || !price) {
       //throw new Error('Title and price are required');
@@ -94,13 +94,13 @@ router.post('/api/v1/product', (req, res) => {
         });
       }
     );
- // } 
-  /*catch (error) {
-    res.status(404).json({
+  } 
+  catch (error) {
+    res.status(400).json({
       status: 'Error',
       message: error.message,
     });
-  }*/
+  }
 });
 
 const app = express();
