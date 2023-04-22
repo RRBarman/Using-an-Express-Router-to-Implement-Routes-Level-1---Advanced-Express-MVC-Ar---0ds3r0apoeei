@@ -53,7 +53,7 @@ router.get('/api/v1/product', (req, res) => {
     });
   } catch (error) {
     res.status(400).json({
-      status: 'Error',
+      status: 'error',
       message: error.message,
     });
   }
@@ -64,7 +64,7 @@ router.post('/api/v1/product', (req, res) => {
     const { title, price } = req.body;
     if (!title || !price) {
       //throw new Error('Title and price are required');
-      req.status(404).json({
+      return req.status(404).json({
         status:'Error',
         message:'Title and price are required',
       });
@@ -75,17 +75,17 @@ router.post('/api/v1/product', (req, res) => {
       price,
     };
     products.push(newProduct);
-    fs.writeFile(
+    fs.writeFileSync(
       `${__dirname}/../dev-data/product.json`,
-      JSON.stringify(products),
-      (err) => {
-        if (err){ 
+      JSON.stringify(products));//,
+      //(err) => {
+       // if (err){ 
           //throw new Error('Error creating product');
-          req.status(400).json({
+         /*return req.status(400).json({
             status:'Error',
             message:'Error creating product',
-            });
-        }
+            });*/
+       // }
         res.status(201).json({
           status: 'success',
           data: {
@@ -98,8 +98,9 @@ router.post('/api/v1/product', (req, res) => {
   catch (error) {
     res.status(400).json({
       status: 'Error',
-      message: error.message,
+      message: 'Error creating product',
     });
+  
   }
 });
 
